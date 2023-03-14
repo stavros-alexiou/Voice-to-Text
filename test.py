@@ -11,6 +11,7 @@ else:
 
 processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-large-960h")
 model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-large-960h")
+model = model.to(device)
 
 recognition = sr.Recognizer()
 
@@ -22,7 +23,7 @@ with sr.Microphone(sample_rate = 16000) as source:                              
         clip = AudioSegment.from_file(data)                                                                 # NumPy array
         x = torch.FloatTensor(clip.get_array_of_samples())                                                  # tensor
 
-        inputs = processor(x, sampling_rate = 16000, return_tensors='pt', padding='longest').input_values
+        inputs = processor(x, sampling_rate = 16000, return_tensors='pt', padding='longest').to(device).input_values
         logits = model(inputs).logits
         tokens = torch.argmax(logits, axis = -1)
         text = processor.batch_decode(tokens)                                                               # tokens to strings
