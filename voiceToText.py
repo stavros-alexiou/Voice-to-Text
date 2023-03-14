@@ -5,13 +5,13 @@ import io
 from pydub import AudioSegment
 
 if torch.cuda.is_available():
-    device = "cuda:0"  
+    device = "cuda:0"                                                                                       # initializing GPU session - <cuda:0>
 else:
-    "cpu"
+    "cpu"                                                                                                   # alternative 
 
-processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-large-960h")
-model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-large-960h")
-model = model.to(device)
+processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-large-960h")                               # initializing processor - tokenizing
+model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-large-960h")                                      # model initialization
+model = model.to(device)                                                                                    # GPU model execution - <cuda:0>
 
 recognition = sr.Recognizer()
 
