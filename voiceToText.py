@@ -1,15 +1,11 @@
 import torch
-from transformers import AutoProcessor, AutoModelForCTC
+from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
 import speech_recognition as sr
 import io
+from pydub import AudioSegment
 
-# Alternative model
-# from transformers import AutoProcessor, AutoModelForCTC
-# processor = AutoProcessor.from_pretrained("facebook/wav2vec2-large-960h-lv60-self")
-# model = AutoModelForCTC.from_pretrained("facebook/wav2vec2-large-960h-lv60-self")
-
-processor = AutoProcessor.from_pretrained("zuu/automatic-speech-recognition")
-model = AutoModelForCTC.from_pretrained("zuu/automatic-speech-recognition")
+processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base-960h")
+model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
 
 recognition = sr.Recognizer()
 
