@@ -1,4 +1,6 @@
+from transformers import pipeline
 import voiceToText
 
-input = "sample1.mp3"
-voiceToText.voiceToText(input)
+cls = pipeline("automatic-speech-recognition")
+input = cls("sample1.mp3")
+print(input)
