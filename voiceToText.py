@@ -23,5 +23,3 @@ with sr.Microphone(sample_rate = 16000) as source:                              
         text = processor.batch_decode(tokens)                                                               # tokens to strings
 
         print("You said: ", str(text).lower())
-
-
